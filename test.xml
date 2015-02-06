@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GB2312"?>
+<fields>
+	<user>
+		<id>zhys9</id>
+		<email>zhys99@gmail.com</email>
+		<blog>http://www.zhys9.com</blog>
+		<country>China</country>
+	</user>
+	<user>
+		<id>test</id>
+		<email>test@domain.com</email>
+		<blog>http://test.domain.com</blog>
+		<country>China</country>
+	</user>
+</fields>

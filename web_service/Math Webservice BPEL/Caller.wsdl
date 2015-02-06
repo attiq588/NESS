@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<definitions name="Caller"
+        targetNamespace="http://MyTest.com/Test"
+        xmlns:tns="http://MyTest.com/Test"
+        xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <types>
+        <schema attributeFormDefault="unqualified" elementFormDefault="qualified" 
+                targetNamespace="http://MyTest.com/Test" 
+                xmlns="http://www.w3.org/2001/XMLSchema">
+
+            <element name="CallerRequest">
+                <complexType>
+                    <sequence>
+                        <element name="input" type="string"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="CallerResponse">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="string"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+    </types>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <message name="CallerRequestMessage">
+        <part name="payload" element="tns:CallerRequest"/>
+    </message>
+    <message name="CallerResponseMessage">
+        <part name="payload" element="tns:CallerResponse"/>
+    </message>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     PORT TYPE DEFINITION - A port type groups a set of operations into
+     a logical service unit.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+
+    <!-- portType implemented by the Caller BPEL process -->
+    <portType name="Caller">
+        <operation name="process">
+            <input  message="tns:CallerRequestMessage" />
+            <output message="tns:CallerResponseMessage"/>
+        </operation>
+    </portType>
+  
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     PARTNER LINK TYPE DEFINITION
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <plnk:partnerLinkType name="Caller">
+        <plnk:role name="CallerProvider" portType="tns:Caller"/>
+    </plnk:partnerLinkType>
+    
+    <binding name="CallerBinding" type="tns:Caller">
+    	<soap:binding style="document"
+    		transport="http://schemas.xmlsoap.org/soap/http">
+    	</soap:binding>
+    	<operation name="process">
+    		<soap:operation
+    			soapAction="http://MyTest.com/Test/process">
+    		</soap:operation>
+    		<input>
+    			<soap:body use="literal"></soap:body>
+    		</input>
+    		<output>
+    			<soap:body use="literal"></soap:body>
+    		</output>
+    	</operation>
+    </binding>
+    <service name="CallerService">
+    	<port name="CallerPort" binding="tns:CallerBinding">
+    		<soap:address location="http://localhost:8080/ode/processes/Caller" />
+    	</port>
+    </service>
+</definitions>

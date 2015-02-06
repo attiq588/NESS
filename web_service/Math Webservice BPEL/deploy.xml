@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://ode.fivesight.com/schemas/2006/06/27/dd"
+    xmlns:pns="http://MyTest.com/Test"
+    xmlns:wns="http://example.ws">
+    
+  <process name="pns:Caller">
+    <active>true</active>
+    <provide partnerLink="client">
+      <service name="pns:CallerService" port="CallerPort"/>
+    </provide>
+    <!-- If it is a BPEL process also deployed under the same project-->
+    <!--<provide partnerLink="DSLink">
+      <service name="wns:Math Webservice" port="Math Webservice"/>
+    </provide>-->
+    <!-- Math Webservice is an exsiting/external Web Service -->
+	<invoke partnerLink="DSLink">
+		<service name="wns:Math Webservice" port="Math Webservice"/>
+	</invoke>
+	<cleanup on="always" />
+  </process>
+  </deploy>

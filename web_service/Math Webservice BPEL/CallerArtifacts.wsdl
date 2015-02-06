@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:tns="http://MyTest.com/TestArtifacts" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://example.ws" name="CallerArtifacts" targetNamespace="http://MyTest.com/TestArtifacts" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <plnk:partnerLinkType name="DSLinkType">
+    <plnk:role name="DSProvider" portType="wsdlMath Webservice"/>
+  </plnk:partnerLinkType>
+  <import location="Math Webservice.wsdl" namespace="http://example.ws"/>
+</definitions>
